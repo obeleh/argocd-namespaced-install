@@ -29,7 +29,7 @@ resources:
 _application_ns_resources = lambda _argo_namespace: str, _namespace: str, _output_folder: str, _repo_url: str, _repo_path: str {
     _gitopscontroller_resources = [
         {
-            apiVersion = "kustomize.config.k8s.io/v1beta1"
+            apiVersion = "rbac.authorization.k8s.io/v1"
             kind = "Role"
             metadata = {
                 namespace = _namespace
@@ -50,7 +50,7 @@ _application_ns_resources = lambda _argo_namespace: str, _namespace: str, _outpu
             ]
         }
         {
-            apiVersion = "kustomize.config.k8s.io/v1beta1"
+            apiVersion = "rbac.authorization.k8s.io/v1"
             kind = "RoleBinding"
             metadata = {
                 namespace = _namespace
