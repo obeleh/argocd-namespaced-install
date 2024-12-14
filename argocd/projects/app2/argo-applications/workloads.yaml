@@ -7,19 +7,19 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   namespace: argocd-custom-ns
-  name: app1-workloads
+  name: app2-workloads
 spec:
   generators:
   - git:
       repoURL: https://github.com/obeleh/argocd-namespaced-install.git
       revision: main
       directories:
-      - path: argocd/projects/app1/workloads/*
+      - path: argocd/projects/app2/workloads/*
   template:
     metadata:
       name: '{{path.basename}}'
     spec:
-      project: app1
+      project: app2
       syncPolicy:
         automated:
           prune: false
@@ -36,4 +36,4 @@ spec:
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: app1
+        namespace: app2

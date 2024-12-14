@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-guestbook
+  name: gitops-controller
   namespace: argocd-custom-ns
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -9,10 +9,10 @@ spec:
   syncPolicy:
     automated: {}
   destination:
-    namespace: app1
+    namespace: argocd-custom-ns
     server: https://kubernetes.default.svc
-  project: app1
+  project: gitops-controller
   source:
-    path: helm-guestbook
-    repoURL: https://github.com/argoproj/argocd-example-apps.git
-    targetRevision: master
+    path: argocd/gitopscontroller
+    targetRevision: main
+    repoURL: https://github.com/obeleh/argocd-namespaced-install.git

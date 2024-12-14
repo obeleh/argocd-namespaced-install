@@ -7,11 +7,11 @@ kcl_options:
       - app2
   - key: argo_version
     value: v2.13.2
-  - key: generate_crd_kustomization
-    value: true
   - key: output_folder
     value: "../argocd"
-  - key: self_manage_config
-    value:
-      repoURL: "https://github.com/obeleh/argocd-namespaced-install.git"
-      path: "argocd/gitopscontroller"
+  - key: repo_url
+    value: "https://github.com/obeleh/argocd-namespaced-install.git"
+  - key: bootstrap_namespaces
+    value: true
+  - key: bootstrap_crds
+    value: true
