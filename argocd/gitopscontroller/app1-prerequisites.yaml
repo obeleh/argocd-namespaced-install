@@ -22,6 +22,15 @@ subjects:
   - kind: ServiceAccount
     name: argocd-application-controller
     namespace: argocd-custom-ns
+  - kind: ServiceAccount
+    name: argocd-applicationset-controller
+    namespace: argocd-custom-ns
+  - kind: ServiceAccount
+    name: argocd-repo-server
+    namespace: argocd-custom-ns
+  - kind: ServiceAccount
+    name: argocd-server
+    namespace: argocd-custom-ns
 roleRef:
   kind: Role
   name: argocd-role
