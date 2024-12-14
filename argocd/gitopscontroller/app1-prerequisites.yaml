@@ -56,10 +56,10 @@ spec:
         repoURL: https://github.com/obeleh/argocd-namespaced-install.git
         revision: main
         directories:
-          - path: argocd/workloads/app1/*
+          - path: argocd/projects/app1/workloads/*
   template:
     metadata:
-      name: '{{path.path.basename}}-{{path.basename}}'
+      name: '{{path.basename}}'
     spec:
       project: app1
       syncPolicy:
@@ -79,3 +79,24 @@ spec:
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: app1
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app1-argo-applications
+  namespace: argocd-custom-ns
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  syncPolicy:
+    automated: {}
+  destination:
+    namespace: app1
+    server: https://kubernetes.default.svc
+  project: gitops-controller
+  source:
+    path: argocd/projects/app1/argo-applications
+    targetRevision: main
+    repoURL: https://github.com/obeleh/argocd-namespaced-install.git
