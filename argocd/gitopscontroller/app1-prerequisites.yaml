@@ -86,7 +86,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: app1-argo-applications
-  namespace: argocd-custom-ns
+  namespace: app1
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
