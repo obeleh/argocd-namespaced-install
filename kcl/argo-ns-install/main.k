@@ -25,7 +25,7 @@ if not file.exists("${_output_folder}/bootstrap"):
     file.mkdir("${_output_folder}/bootstrap")
 
 _bootstrap_kustomization = {
-    apiVersion = "kustomize.config.k8s.io/v1"
+    apiVersion = "kustomize.config.k8s.io/v1beta1"
     kind = "Kustomization"
     resources = [
         "../gitopscontroller"
@@ -69,7 +69,7 @@ _argocd_custom_ns = {
 }
 
 _base_kustomization = {
-    apiVersion = "kustomize.config.k8s.io/v1"
+    apiVersion = "kustomize.config.k8s.io/v1beta1"
     kind = "Kustomization"
     namespace = _argo_namespace
     resources = [
@@ -78,7 +78,7 @@ _base_kustomization = {
 }
 
 _kustomization = {
-    apiVersion = "kustomize.config.k8s.io/v1"
+    apiVersion = "kustomize.config.k8s.io/v1beta1"
     kind = "Kustomization"
     resources = ["base"] + ["${ns}-prerequisites.yaml" for ns in _application_namespaces]
 }
