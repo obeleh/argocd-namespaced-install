@@ -6,3 +6,4 @@ kind: Kustomization
 namespace: argocd-custom-ns
 resources:
 - workloads.yaml
+- app.yaml
