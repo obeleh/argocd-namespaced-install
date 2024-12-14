@@ -27,5 +27,5 @@ spec:
   project: gitops-controller
   source:
     path: argocd/gitopscontroller
-    repoUrl: https://github.com/obeleh/argocd-namespaced-install.git
+    repoURL: https://github.com/obeleh/argocd-namespaced-install.git
     targetRevision: main

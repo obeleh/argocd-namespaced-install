@@ -115,7 +115,7 @@ _gitops_controller_app = {
         project = "gitops-controller"
         source = {
             path = "${_repo_path}/gitopscontroller"
-            repoUrl = _repo_url
+            repoURL = _repo_url
             targetRevision = "main"
         }
     }
