@@ -74,7 +74,7 @@ _base_kustomization = {
     namespace = _argo_namespace
     resources = [
         "https://raw.githubusercontent.com/argoproj/argo-cd/${_argo_version}/manifests/namespace-install.yaml"
-    ] + ["app-project.yaml", "in-cluster.yaml", "application.yaml"]
+    ] + ["app-project.yaml", "in-cluster.yaml", "application.yaml", "rbac.yaml"]
 }
 
 _kustomization = {
@@ -162,13 +162,63 @@ _namespaces = [
     } for ns in _application_namespaces + [_argo_namespace]
 ]
 
-_ = [application._application_ns_resources(_argo_namespace, ns, _output_folder, _repo_url, _repo_path) for ns in _application_namespaces]
+_argo_ns_rbac = [
+    {
+        apiVersion = "rbac.authorization.k8s.io/v1"
+        kind = "Role"
+        metadata = {
+            namespace = _argo_namespace
+            name = "argocd-role"
+        }
+        rules = [
+            {
+                apiGroups = [
+                    "*"
+                ]
+                resources = [
+                    "*"
+                ]
+                verbs = [
+                    "*"
+                ]
+            }
+        ]
+    }
+    {
+        apiVersion = "rbac.authorization.k8s.io/v1"
+        kind = "RoleBinding"
+        metadata = {
+            namespace = _argo_namespace
+            name = "argocd-role-binding"
+        }
+        subjects = [
+            {
+                kind = "ServiceAccount"
+                name = "argocd-application-controller"
+                namespace = _argo_namespace
+            }
+            {
+                kind = "ServiceAccount"
+                name = "argocd-server"
+                namespace = _argo_namespace
+            }
+        ]
+        roleRef = {
+            kind = "Role"
+            name = "argocd-role"
+            apiGroup = "rbac.authorization.k8s.io"
+        }
+    }
+]
 
+_ = [application._application_ns_resources(_argo_namespace, ns, _output_folder, _repo_url, _repo_path) for ns in _application_namespaces]
+fileheader._dump_with_header(_argo_ns_rbac, "${_output_folder}/gitopscontroller/base/rbac.yaml", _generated_header)
 fileheader._dump_with_header(_gitops_controller_app, "${_output_folder}/gitopscontroller/base/application.yaml", _generated_header)
 fileheader._dump_with_header(_base_kustomization, "${_output_folder}/gitopscontroller/base/kustomization.yaml", _generated_header)
 fileheader._dump_with_header(_gitops_controller_app_project, "${_output_folder}/gitopscontroller/base/app-project.yaml", _generated_header)
 fileheader._dump_with_header(_in_cluster, "${_output_folder}/gitopscontroller/base/in-cluster.yaml", _generated_header)
 fileheader._dump_with_header(_kustomization, "${_output_folder}/gitopscontroller/kustomization.yaml", _generated_header)
 fileheader._dump_with_header(_bootstrap_kustomization, "${_output_folder}/bootstrap/kustomization.yaml", _generated_header)
+file.write("${_output_folder}/bootstrap/README.md", "# Bootstrapping\n\nRun the following command twice (you'll get a CRD error the first time):\n```bash\nkubectl apply -k .\n```\n")
 if _bootstrap_namespaces:
     fileheader._dump_all_with_header(_namespaces, "${_output_folder}/bootstrap/namespaces.yaml", _generated_header)

@@ -11,3 +11,4 @@ resources:
 - app-project.yaml
 - in-cluster.yaml
 - application.yaml
+- rbac.yaml
