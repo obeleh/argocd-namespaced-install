@@ -1,0 +1,17 @@
+kcl_options:
+  - key: argo_namespace
+    value: argocd-custom-ns
+  - key: application_namespaces
+    value:
+      - app1
+      - app2
+  - key: argo_version
+    value: v2.13.2
+  - key: generate_crd_kustomization
+    value: true
+  - key: output_folder
+    value: "../argocd"
+  - key: self_manage_config
+    value:
+      repoURL: ""
+      path: "argocd/gitopscontroller"
