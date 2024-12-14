@@ -53,7 +53,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL:
+        repoURL: https://github.com/obeleh/argocd-namespaced-install.git
         revision: main
         directories:
           - path: argocd/workloads/app1/*
