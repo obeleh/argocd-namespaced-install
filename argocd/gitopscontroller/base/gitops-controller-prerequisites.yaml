@@ -42,6 +42,10 @@ spec:
   destinations:
   - namespace: argocd-custom-ns
     server: https://kubernetes.default.svc
+  - namespace: app1
+    server: https://kubernetes.default.svc
+  - namespace: app2
+    server: https://kubernetes.default.svc
   sourceRepos:
   - '*'
   namespaceResourceWhitelist:
