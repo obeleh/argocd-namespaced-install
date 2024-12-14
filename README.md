@@ -1,6 +1,7 @@
 # ArgoCD namespaced installation with KCL
 
 This is a declarative way to install ArgoCD in a namespace using Kustomize
+ArgoCD is configured to be "self-managed" so updating ArgoCD can be done by updating your git repo.
 The kustomize configuration is generated using KCL-lang
 RBAC permissions are included so that ArgoCD can manage resources in multiple namespaces
 ArgoCD resources are only read from the namespace where ArgoCD is installed
