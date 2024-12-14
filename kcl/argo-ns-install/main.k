@@ -45,7 +45,7 @@ _in_cluster = {
         }
     }
     stringData = {
-        config = r"""tlsClientConfig":{"insecure":false}}"""
+        config = r"""{"tlsClientConfig":{"insecure":false}}"""
         name = "in-cluster"
         namespaces = ",".join(_application_namespaces)
         server = "https://kubernetes.default.svc"
@@ -65,7 +65,6 @@ _kustomization = {
     kind = "Kustomization"
     namespace = _argo_namespace
     resources = [
-        "argo-ns.yaml"
         "https://raw.githubusercontent.com/argoproj/argo-cd/${_argo_version}/manifests/namespace-install.yaml"
     ] + ["${ns}-prerequisites.yaml" for ns in _application_namespaces]
 }
@@ -101,13 +100,12 @@ _ = [yaml.dump_all_to_file(_application_ns_resources(ns, _argo_namespace, ns), "
 if _self_manage_config:
     yaml.dump_all_to_file(_gitops_controller_prerequisites, "${_output_folder}/gitopscontroller/gitops-controller-prerequisites.yaml")
     yaml.dump_to_file(_gitops_controller_app, "${_output_folder}/gitopscontroller/application.yaml")
-    _kustomization["resources"] += [
-        "application.yaml"
-        "gitops-controller-prerequisites.yaml"
-    ]
+    _kustomization["resources"] = ["gitops-controller-prerequisites.yaml"] + _kustomization["resources"] + ["application.yaml"]
+else:
+    _kustomization["resources"] = ["argocd-ns.yaml"] + _kustomization["resources"]
+    yaml.dump_to_file(_argocd_custom_ns, "${_output_folder}/gitopscontroller/argocd-ns.yaml")
 
 yaml.dump_to_file(_in_cluster, "${_output_folder}/gitopscontroller/in-cluster.yaml")
-yaml.dump_to_file(_argocd_custom_ns, "${_output_folder}/gitopscontroller/argocd-custom-ns.yaml")
 yaml.dump_to_file(_kustomization, "${_output_folder}/gitopscontroller/kustomization.yaml")
 if _generate_crd_kustomization:
     yaml.dump_to_file(_crd_kustomization, "${_output_folder}/crds/kustomization.yaml")

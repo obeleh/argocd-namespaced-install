@@ -6,7 +6,8 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: cluster
 stringData:
-  config: tlsClientConfig":{"insecure":false}}
+  config: |
+    {"tlsClientConfig":{"insecure":false}}
   name: in-cluster
-  namespaces: app1,app2
+  namespaces: argocd-custom-ns,app1,app2
   server: https://kubernetes.default.svc
