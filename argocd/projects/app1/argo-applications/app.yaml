@@ -20,8 +20,8 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  namespace: app1
-  name: argocd-custom-ns
+  namespace: argocd-custom-ns
+  name: app1-workloads
 spec:
   generators:
     - git:
