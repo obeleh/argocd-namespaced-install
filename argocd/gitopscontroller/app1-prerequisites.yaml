@@ -66,12 +66,12 @@ spec:
         automated:
           prune: false
           selfHeal: true
-      retry:
-        limit: 15
-        backoff:
-          duration: 15s
-          factor: 2
-          maxDuration: 5m
+        retry:
+          limit: 15
+          backoff:
+            duration: 15s
+            factor: 2
+            maxDuration: 5m
       source:
         repoURL: https://github.com/obeleh/argocd-namespaced-install.git
         targetRevision: main
