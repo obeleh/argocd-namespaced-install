@@ -6,6 +6,8 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
+  syncPolicy:
+    automated: {}
   destination:
     namespace: app1
     server: https://kubernetes.default.svc
