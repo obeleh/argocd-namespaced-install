@@ -75,7 +75,7 @@ spec:
       source:
         repoURL: https://github.com/obeleh/argocd-namespaced-install.git
         targetRevision: main
-        path: '{{path}}'
+        path: 'argocd/projects/app1/workloads/{{path}}'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: app1
