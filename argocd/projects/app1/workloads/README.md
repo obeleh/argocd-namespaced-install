@@ -6,7 +6,7 @@ Every folder should contain a `kustomization.yaml` and of course, the resources 
 
 Example:
 ```yaml
-apiVersion: kustomize.config.k8s.io/v1
+apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: argocd-custom-ns
 resources:

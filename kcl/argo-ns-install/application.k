@@ -18,7 +18,7 @@ Every folder should contain a `kustomization.yaml` and of course, the resources 
 
 Example:
 ```yaml
-apiVersion: kustomize.config.k8s.io/v1
+apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: argocd-custom-ns
 resources:
@@ -148,7 +148,7 @@ _application_ns_resources = lambda _argo_namespace: str, _namespace: str, _outpu
         file.mkdir("${_output_folder}/projects/${_namespace}/workloads")
 
     _kustomization = {
-        apiVersion = "kustomize.config.k8s.io/v1"
+        apiVersion = "kustomize.config.k8s.io/v1beta1"
         kind = "Kustomization"
         namespace: _argo_namespace
         resources = [
