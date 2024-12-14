@@ -13,5 +13,5 @@ kcl_options:
     value: "../argocd"
   - key: self_manage_config
     value:
-      repoURL: ""
+      repoURL: "https://github.com/obeleh/argocd-namespaced-install.git"
       path: "argocd/gitopscontroller"
