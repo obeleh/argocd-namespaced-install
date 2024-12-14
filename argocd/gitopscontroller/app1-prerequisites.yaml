@@ -60,6 +60,7 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}'
+      namespace: app1
     spec:
       project: app1
       syncPolicy:
