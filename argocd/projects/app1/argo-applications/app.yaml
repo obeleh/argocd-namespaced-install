@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: app1
     server: https://kubernetes.default.svc
-  project: default
+  project: app1
   source:
     path: helm-guestbook
     repoURL: https://github.com/argoproj/argocd-example-apps.git
