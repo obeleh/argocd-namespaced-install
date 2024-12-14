@@ -212,7 +212,7 @@ _argo_ns_rbac = [
 ]
 
 _ = [application._application_ns_resources(_argo_namespace, ns, _output_folder, _repo_url, _repo_path) for ns in _application_namespaces]
-fileheader._dump_with_header(_argo_ns_rbac, "${_output_folder}/gitopscontroller/base/rbac.yaml", _generated_header)
+fileheader._dump_all_with_header(_argo_ns_rbac, "${_output_folder}/gitopscontroller/base/rbac.yaml", _generated_header)
 fileheader._dump_with_header(_gitops_controller_app, "${_output_folder}/gitopscontroller/base/application.yaml", _generated_header)
 fileheader._dump_with_header(_base_kustomization, "${_output_folder}/gitopscontroller/base/kustomization.yaml", _generated_header)
 fileheader._dump_with_header(_gitops_controller_app_project, "${_output_folder}/gitopscontroller/base/app-project.yaml", _generated_header)
