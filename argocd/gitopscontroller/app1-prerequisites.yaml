@@ -59,7 +59,7 @@ spec:
           - path: argocd/workloads/app1/*
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{path.path.basename}}-{{path.basename}}'
     spec:
       project: app1
       syncPolicy:
